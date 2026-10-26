@@ -69,7 +69,7 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.iamnasim.com";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://url.iamnasim.com";
 
   return (
     <main className="min-h-screen flex flex-col items-center px-4 py-12 sm:py-20">
@@ -80,7 +80,7 @@ export default function Home() {
             Shorten URL
           </h1>
           <p className="mt-2 text-muted text-sm">
-            Fast & simple · iamnasim.com
+            Fast & simple · url.iamnasim.com
           </p>
         </div>
 

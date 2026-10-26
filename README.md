@@ -1,13 +1,13 @@
-# URL Shortener for iamnasim.com
+# URL Shortener for url.iamnasim.com
 
 Simple, fast URL shortener built with **Next.js 14** + **Supabase** + **Vercel**.
 
 ## Features
 
 - Shorten any URL instantly
-- Clean short links: `iamnasim.com/xxxxxx`
+- Clean short links: `url.iamnasim.com/xxxxxx`
 - Shows last 10 shortened links on homepage
-- Minimal, calm design
+- Minimal, cream + black design
 
 ## Setup
 
@@ -38,7 +38,7 @@ Copy `.env.example` to `.env.local` and fill in:
 ```
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
-NEXT_PUBLIC_BASE_URL=https://www.iamnasim.com
+NEXT_PUBLIC_BASE_URL=https://url.iamnasim.com
 ```
 
 ### 3. Run locally
@@ -52,7 +52,7 @@ npm run dev
 
 1. Import this repository in Vercel
 2. Add the three environment variables above
-3. Add custom domain `www.iamnasim.com`
+3. Add custom domain `url.iamnasim.com`
 4. Deploy
 
 That's it.

@@ -76,10 +76,10 @@ export default function Home() {
       <div className="w-full max-w-xl">
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-teal-900">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-ink">
             Shorten URL
           </h1>
-          <p className="mt-2 text-teal-700/80 text-sm">
+          <p className="mt-2 text-muted text-sm">
             Fast & simple · iamnasim.com
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function Home() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Paste your long URL here..."
-              className="w-full px-5 py-4 rounded-xl border border-teal-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent text-ink placeholder:text-gray-400"
+              className="w-full px-5 py-4 rounded-xl border border-border bg-paper shadow-sm focus:outline-none focus:ring-2 focus:ring-ink focus:border-transparent text-ink placeholder:text-muted/60"
               required
             />
           </div>
@@ -100,7 +100,7 @@ export default function Home() {
           <button
             type="submit"
             disabled={loading || !url.trim()}
-            className="w-full py-3.5 rounded-xl bg-teal-700 hover:bg-teal-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium transition-colors"
+            className="w-full py-3.5 rounded-xl bg-ink hover:bg-black disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium transition-colors"
           >
             {loading ? "Shortening..." : "Shorten"}
           </button>
@@ -108,27 +108,27 @@ export default function Home() {
 
         {/* Error */}
         {error && (
-          <div className="mt-4 p-3 rounded-lg bg-red-50 text-red-700 text-sm text-center">
+          <div className="mt-4 p-3 rounded-lg bg-red-50 text-red-700 text-sm text-center border border-red-100">
             {error}
           </div>
         )}
 
         {/* Result */}
         {shortUrl && (
-          <div className="mt-6 p-5 rounded-xl bg-white border border-teal-100 shadow-sm">
-            <p className="text-xs text-teal-600 mb-2 font-medium">Your short link</p>
+          <div className="mt-6 p-5 rounded-xl bg-paper border border-border shadow-sm">
+            <p className="text-xs text-muted mb-2 font-medium">Your short link</p>
             <div className="flex items-center gap-3">
               <a
                 href={shortUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 text-teal-800 font-medium break-all hover:underline"
+                className="flex-1 text-ink font-medium break-all hover:underline"
               >
                 {shortUrl}
               </a>
               <button
                 onClick={copyToClipboard}
-                className="shrink-0 px-4 py-2 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-800 text-sm font-medium transition-colors"
+                className="shrink-0 px-4 py-2 rounded-lg bg-cream hover:bg-border text-ink text-sm font-medium transition-colors border border-border"
               >
                 {copied ? "Copied!" : "Copy"}
               </button>
@@ -138,12 +138,12 @@ export default function Home() {
 
         {/* History */}
         <div className="mt-12">
-          <h2 className="text-sm font-semibold text-teal-800 uppercase tracking-wider mb-4">
+          <h2 className="text-sm font-semibold text-ink uppercase tracking-wider mb-4">
             Recent Links
           </h2>
 
           {history.length === 0 ? (
-            <p className="text-sm text-teal-600/70 text-center py-8">
+            <p className="text-sm text-muted text-center py-8">
               No links yet. Create your first one above.
             </p>
           ) : (
@@ -151,7 +151,7 @@ export default function Home() {
               {history.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-xl bg-white border border-teal-50 shadow-sm hover:border-teal-100 transition-colors"
+                  className="p-4 rounded-xl bg-paper border border-border shadow-sm hover:border-muted/30 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
@@ -159,15 +159,15 @@ export default function Home() {
                         href={`${baseUrl}/${item.short_code}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-teal-800 font-medium hover:underline"
+                        className="text-ink font-medium hover:underline"
                       >
                         {baseUrl.replace("https://", "")}/{item.short_code}
                       </a>
-                      <p className="mt-1 text-xs text-gray-500 truncate">
+                      <p className="mt-1 text-xs text-muted truncate">
                         {item.original_url}
                       </p>
                     </div>
-                    <span className="text-xs text-teal-600/60 shrink-0">
+                    <span className="text-xs text-muted/70 shrink-0">
                       {new Date(item.created_at).toLocaleDateString()}
                     </span>
                   </div>
@@ -178,7 +178,7 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-16 text-center text-xs text-teal-700/50">
+        <footer className="mt-16 text-center text-xs text-muted">
           Built by Nasim Bin Jasim
         </footer>
       </div>

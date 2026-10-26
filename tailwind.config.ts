@@ -9,16 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        teal: {
-          50: "#f0fdfa",
-          100: "#ccfbf1",
-          600: "#0d9488",
-          700: "#0f766e",
-          800: "#115e59",
-          900: "#134e4a",
-        },
-        paper: "#F4F1EA",
-        ink: "#1C1F1C",
+        cream: "#F8F5F0",
+        paper: "#FDFBF7",
+        ink: "#111111",
+        muted: "#6B6B6B",
+        border: "#E5E0D8",
       },
     },
   },

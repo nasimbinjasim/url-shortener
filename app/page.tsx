@@ -31,7 +31,7 @@ export default function Home() {
       }
     }
     fetchHistory();
-  }, [shortUrl]); // refresh after new short url
+  }, [shortUrl]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -70,6 +70,11 @@ export default function Home() {
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://url.iamnasim.com";
+
+  // QR code image using free public API
+  const qrCodeUrl = shortUrl
+    ? `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(shortUrl)}`
+    : "";
 
   return (
     <main className="min-h-screen flex flex-col items-center px-4 py-12 sm:py-20">
@@ -113,25 +118,40 @@ export default function Home() {
           </div>
         )}
 
-        {/* Result */}
+        {/* Result + QR Code */}
         {shortUrl && (
           <div className="mt-6 p-5 rounded-xl bg-paper border border-border shadow-sm">
-            <p className="text-xs text-muted mb-2 font-medium">Your short link</p>
-            <div className="flex items-center gap-3">
-              <a
-                href={shortUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 text-ink font-medium break-all hover:underline"
-              >
-                {shortUrl}
-              </a>
-              <button
-                onClick={copyToClipboard}
-                className="shrink-0 px-4 py-2 rounded-lg bg-cream hover:bg-border text-ink text-sm font-medium transition-colors border border-border"
-              >
-                {copied ? "Copied!" : "Copy"}
-              </button>
+            <p className="text-xs text-muted mb-3 font-medium">Your short link</p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-5">
+              {/* QR Code */}
+              <div className="shrink-0">
+                <img
+                  src={qrCodeUrl}
+                  alt="QR Code"
+                  width={140}
+                  height={140}
+                  className="rounded-lg border border-border"
+                />
+              </div>
+
+              {/* Short URL + Copy */}
+              <div className="flex-1 w-full min-w-0">
+                <a
+                  href={shortUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-ink font-medium break-all hover:underline mb-3"
+                >
+                  {shortUrl}
+                </a>
+                <button
+                  onClick={copyToClipboard}
+                  className="px-4 py-2 rounded-lg bg-cream hover:bg-border text-ink text-sm font-medium transition-colors border border-border"
+                >
+                  {copied ? "Copied!" : "Copy Link"}
+                </button>
+              </div>
             </div>
           </div>
         )}

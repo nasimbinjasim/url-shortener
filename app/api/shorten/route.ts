@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 import { supabase } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     const { url } = await request.json();
@@ -33,10 +35,17 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error(error);
-      return NextResponse.json({ error: "Failed to create short URL" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Failed to create short URL" },
+        { status: 500 }
+      );
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://url.iamnasim.com";
+    // Always prefer https for the public short link
+    let baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://url.iamnasim.com";
+    if (baseUrl.startsWith("http://")) {
+      baseUrl = baseUrl.replace("http://", "https://");
+    }
 
     return NextResponse.json({
       shortUrl: `${baseUrl}/${data.short_code}`,

@@ -47,8 +47,28 @@ export async function POST(request: NextRequest) {
       baseUrl = baseUrl.replace("http://", "https://");
     }
 
+    const shortUrl = `${baseUrl}/${data.short_code}`;
+
+    // Send to Google Sheet (fire-and-forget — does not block the response)
+    const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          shortCode: data.short_code,
+          shortUrl: shortUrl,
+          originalUrl: data.original_url,
+          createdAt: data.created_at || new Date().toISOString(),
+        }),
+      }).catch((err) => {
+        // Log but never fail the short-link creation
+        console.error("Google Sheet webhook failed:", err);
+      });
+    }
+
     return NextResponse.json({
-      shortUrl: `${baseUrl}/${data.short_code}`,
+      shortUrl,
       shortCode: data.short_code,
       originalUrl: data.original_url,
     });
